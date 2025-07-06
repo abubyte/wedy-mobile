@@ -112,9 +112,7 @@ class PrettyDioLogger extends Interceptor {
     _printResponseHeader(response);
     if (responseHeader) {
       final responseHeaders = <String, String>{};
-      response.headers.forEach(
-        (k, list) => responseHeaders[k] = list.toString(),
-      );
+      response.headers.forEach((k, list) => responseHeaders[k] = list.toString());
       _printMapAsTable(responseHeaders, header: 'Headers');
     }
 
@@ -182,23 +180,14 @@ class PrettyDioLogger extends Interceptor {
     final lines = (msg.length / maxWidth).ceil();
     for (var i = 0; i < lines; ++i) {
       logPrint(
-        (i >= 0 ? 'â•‘ ' : '') +
-            msg.substring(
-              i * maxWidth,
-              math.min<int>(i * maxWidth + maxWidth, msg.length),
-            ),
+        (i >= 0 ? 'â•‘ ' : '') + msg.substring(i * maxWidth, math.min<int>(i * maxWidth + maxWidth, msg.length)),
       );
     }
   }
 
   String _indent([int tabCount = initialTab]) => tabStep * tabCount;
 
-  void _printPrettyMap(
-    Map data, {
-    int tabs = initialTab,
-    bool isListItem = false,
-    bool isLast = false,
-  }) {
+  void _printPrettyMap(Map data, {int tabs = initialTab, bool isListItem = false, bool isLast = false}) {
     var tabs0 = tabs;
     final isRoot = tabs0 == initialTab;
     final initialIndent = _indent(tabs0);
@@ -273,9 +262,7 @@ class PrettyDioLogger extends Interceptor {
   void _printMapAsTable(Map? map, {String? header}) {
     if (map == null || map.isEmpty) return;
     logPrint('â•” $header ');
-    map.forEach(
-      (dynamic key, dynamic value) => _printKV(key.toString(), value),
-    );
+    map.forEach((dynamic key, dynamic value) => _printKV(key.toString(), value));
     _printLine('â•š');
   }
 }
